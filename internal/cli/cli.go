@@ -19,6 +19,7 @@ func NewApp() *App {
 			Usage: "A config joiner",
 			Commands: []*cli.Command{
 				newCommand,
+				joinCommand,
 			},
 		},
 	}
