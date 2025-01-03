@@ -1,0 +1,4 @@
+providers:
+    - name: SHARED_VALKEY_CLUSTER
+      type: yaml
+      location: ./infra/shared_valkey_cluster.yaml

@@ -1,0 +1,9 @@
+APP_NAME: auth
+LISTEN_PORT: 3030
+LOG_LEVEL: info
+VALKEY_SERVER:
+    ADDRESSES:
+        - 10.4.3.5
+        - 10.4.3.7
+        - 10.4.3.9
+    PASSWORD: z1mp8qow5jd2jj2
