@@ -37,6 +37,10 @@ var newCommand = &cli.Command{
 			Name:    "toml-provider",
 			Aliases: []string{"t"},
 		},
+		&cli.BoolFlag{
+			Name:    "package",
+			Aliases: []string{"k"},
+		},
 	},
 	Args:      true,
 	ArgsUsage: "<dir>",
@@ -152,6 +156,26 @@ var newProjectAction = func(context *cli.Context) error {
 			return fmt.Errorf("failed to set: %w", err)
 		}
 		log.Printf("Created toml provider in %s", path)
+	case "package", "k":
+		log.Printf("Creating package in %s", args)
+		if !strings.HasSuffix(strings.ToLower(args), ".yaml") || !strings.HasSuffix(strings.ToLower(args), ".yml") {
+			args = args + ".yaml"
+		}
+		path := filepath.Join(".", PackageConfigDir)
+		if err := os.MkdirAll(path, 0777); err != nil {
+			return fmt.Errorf("failed to create directory: %w", err)
+		}
+		path = filepath.Join(path, args)
+		pk := yaml.New(path)
+		if err := pk.Set(context.Context, info.With(map[string]any{
+			"APP_NAME":      "qwerty",
+			"LISTEN_PORT":   3030,
+			"LOG_LEVEL":     "info",
+			"VALKEY_SERVER": "$SHARED_VALKEY_CLUSTER",
+		})); err != nil {
+			return fmt.Errorf("failed to set: %w", err)
+		}
+		log.Printf("Created package in %s", args)
 	default:
 		return fmt.Errorf("unknown flag: %s", firstFlag)
 	}
