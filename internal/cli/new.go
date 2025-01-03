@@ -114,8 +114,9 @@ var newProjectAction = func(context *cli.Context) error {
 		path = filepath.Join(path, args)
 		pv := json.New(path)
 		if err := pv.Set(context.Context, info.With(map[string]any{
-			"KEY":  "value",
-			"LIST": []string{"a", "b", "c"},
+			"ADDRESSES": []string{"10.4.3.5", "10.4.3.7", "10.4.3.9"},
+			"USERNAME":  "user",
+			"PASSWORD":  "password",
 		})); err != nil {
 			return fmt.Errorf("failed to set: %w", err)
 		}
@@ -132,8 +133,9 @@ var newProjectAction = func(context *cli.Context) error {
 		path = filepath.Join(path, args)
 		pv := yaml.New(path)
 		if err := pv.Set(context.Context, info.With(map[string]any{
-			"KEY":  "value",
-			"LIST": []string{"a", "b", "c"},
+			"ADDRESSES": []string{"10.4.3.5", "10.4.3.7", "10.4.3.9"},
+			"USERNAME":  "user",
+			"PASSWORD":  "password",
 		})); err != nil {
 			return fmt.Errorf("failed to set: %w", err)
 		}
@@ -150,8 +152,9 @@ var newProjectAction = func(context *cli.Context) error {
 		path = filepath.Join(path, args)
 		pv := toml.New(path)
 		if err := pv.Set(context.Context, info.With(map[string]any{
-			"KEY":  "value",
-			"LIST": []string{"a", "b", "c"},
+			"ADDRESSES": []string{"10.4.3.5", "10.4.3.7", "10.4.3.9"},
+			"USERNAME":  "user",
+			"PASSWORD":  "password",
 		})); err != nil {
 			return fmt.Errorf("failed to set: %w", err)
 		}
