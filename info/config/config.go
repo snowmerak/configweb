@@ -41,6 +41,7 @@ func iterateData(data map[string]any) (map[string]any, []*pair.Pair[[]string, st
 				insert = false
 			case string:
 				if strings.HasPrefix(p, "$") {
+					p = p[1:]
 					keys = append(keys, pair.New(kl, p))
 				}
 			}
@@ -96,7 +97,7 @@ func (c *Config) Build(ctx context.Context, target BuildTarget) ([]byte, error) 
 			return nil, fmt.Errorf("failed to get value: %w", err)
 		}
 
-		cm[k.First()[len(k.First())-1]] = v
+		cm[k.First()[len(k.First())-1]] = v.Get()
 	}
 
 	switch target {
