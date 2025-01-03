@@ -68,6 +68,7 @@ func (p *Provider) Set(_ context.Context, data *info.Data) error {
 	}
 
 	encoder := json.NewEncoder(f)
+	encoder.SetIndent("", "  ")
 	value := data.Get()
 	if err = encoder.Encode(value); err != nil {
 		return fmt.Errorf("failed to encode json: %w", err)
