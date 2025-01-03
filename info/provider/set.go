@@ -44,6 +44,7 @@ func (s *Set) To(path string) error {
 	defer f.Close()
 
 	encoder := yaml.NewEncoder(f)
+	defer encoder.Close()
 	if err = encoder.Encode(s); err != nil {
 		return fmt.Errorf("failed to encode yaml: %w", err)
 	}
